@@ -34,26 +34,29 @@ pip install -r requirements.txt
 ## Local Data Export and Retrieval
 
 ### Overview
-The program now supports saving fetched data to local `.pickle` files for faster subsequent access. This feature reduces the need to re-fetch data from the database for the same date range, improving performance.
+
+The program supports saving fetched data to local `.pickle` files for faster access. This feature eliminates the need to repeatedly query the database for the same date range, significantly improving performance.
 
 ### How It Works
-1. **Exported File Naming**:  
-   After fetching documents from the database for a specific date range, the program stores the data in the `local_exports` folder. The file is named based on the selected date range using the format:  
 
-   ```bash
+1. **Exported File Naming**  
+   Data fetched for a specific date range is saved in the `local_exports` folder. The file is named using the format:
+
+   ```
    local_exports/<start_date>_to_<end_date>.pickle
    ```
 
-2. **Automatic Validation**:  
-   Before querying the database, the program checks if a corresponding `.pickle` file already exists in the `local_exports` folder for the selected date range:
-   - If the file exists, the program asks whether to use the local data or overwrite it with new data from the database.
-   - If the file does not exist, the program fetches data from the database and saves it to a new `.pickle` file.
+2. **Automatic Validation**  
+   Before querying the database, the program checks if a corresponding `.pickle` file already exists in `local_exports`:
+   - If the file exists, the program prompts you to either use the local file or overwrite it with new data.
+   - If no file exists, the program fetches data from the database and saves it as a new `.pickle` file.
 
-3. **Improved Performance**:  
-   By utilizing saved `.pickle` files, the program skips the time-consuming process of querying the database and converting documents to Python objects.
+3. **Performance Boost**  
+   Utilizing saved `.pickle` files skips the database query step, making data retrieval significantly faster.
 
 ### Folder Structure
-Ensure your project folder contains the `local_exports` directory. If it doesn’t exist, the program will create it automatically.
+
+Ensure your project includes the `local_exports` directory. If it doesn't exist, the program will create it automatically.
 
 ```
 project_root/
@@ -64,12 +67,31 @@ project_root/
 ```
 
 ### Example Workflow
-1. **First Run (No Export File Exists)**:
-   - The program fetches data for the selected date range from the database.
-   - The data is saved in a `.pickle` file within the `local_exports` folder.
 
-2. **Subsequent Runs (Export File Exists)**:
+1. **First Run (No Export File Exists)**
+   - The program fetches data for the selected date range from MongoDB.
+   - The data is saved as a `.pickle` file in `local_exports`.
+
+2. **Subsequent Runs (Export File Exists)**
    - The program detects the `.pickle` file for the selected date range.
-   - You will be prompted to choose whether to:
-     - Use the saved file for faster access, or
+   - You will be prompted to either:
+     - Use the existing file for faster access, or
      - Overwrite the file by re-fetching data from the database.
+
+---
+
+## Usage
+
+Run the script using:
+
+```bash
+python main.py
+```
+
+Ensure your `.env` file is correctly set up and that you have activated your virtual environment before running the script.
+
+---
+
+## License
+
+This project is licensed under the MIT License.

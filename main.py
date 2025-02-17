@@ -60,7 +60,7 @@ def fetch_songs_from_db() -> List[Song]:
     save_to_pickle(song_data_list, PICKLE_FILE)
     return song_data_list
 
-def plot_songs_by_genre(songs: List[Song]):
+""" def plot_songs_by_genre(songs: List[Song]):
     genre_counts = Counter(song.genre for song in songs)
     plt.figure(figsize=(12, 6))
     plt.bar(genre_counts.keys(), genre_counts.values(), color="skyblue")
@@ -68,6 +68,28 @@ def plot_songs_by_genre(songs: List[Song]):
     plt.ylabel("Number of Songs")
     plt.title("Songs by Genre")
     plt.xticks(rotation=45, ha="right")
+    plt.show() """
+
+def plot_songs_by_genre(songs: List[Song], top_x: int = 10):
+    # Count occurrences of each genre
+    genre_counts = Counter(song.genre for song in songs)
+
+    # Sort genres by count in descending order
+    sorted_genres = genre_counts.most_common(top_x)  # Get top X genres
+
+    # Extract genres and counts for plotting
+    genres, counts = zip(*sorted_genres) if sorted_genres else ([], [])
+
+    # Plot
+    plt.figure(figsize=(12, 6))
+    plt.bar(genres, counts, color='skyblue')
+
+    plt.xlabel("Genre")
+    plt.ylabel("Number of Songs")
+    plt.title(f"Top {top_x} Genres by Song Count")
+    plt.xticks(rotation=45, ha="right")  # Rotate labels for better readability
+    plt.grid(axis='y', linestyle="--", alpha=0.7)
+
     plt.show()
 
 def plot_songs_by_decade(songs: List[Song]):
@@ -97,7 +119,7 @@ def main():
         print("3. Exit")
         choice = input("Enter your choice: ").strip()
         if choice == "1":
-            plot_songs_by_genre(song_data_list)
+            plot_songs_by_genre(song_data_list, top_x=20)  # Change top_x to limit genres displayed
         elif choice == "2":
             plot_songs_by_decade(song_data_list)
         elif choice == "3":
