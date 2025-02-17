@@ -1,7 +1,4 @@
 # trackFinder_analytics
-Analytics for my TrackFinder application
-
-# locationAnalytics
 Simple python project to fetch and study data from a mongo db database. Generate informs to get insights
 
 # Project Setup
@@ -23,8 +20,6 @@ Then create a `.env` file in the root of the project. Then, add the following co
 ```env
 DB_USER=your_database_user
 DB_PASSWORD=your_database_password
-DB_SERVER=your_cluster_url
-DB_NAME=your_database_name
 ```
 
 Make sure to replace the placeholders with your actual MongoDB credentials. Also, ensure the .env file is not committed by adding it to your .gitignore:

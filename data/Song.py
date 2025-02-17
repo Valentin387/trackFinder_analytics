@@ -1,9 +1,6 @@
-
-from datetime import datetime
 from pydantic import BaseModel, Field
-from typing import Optional
 from bson import ObjectId
-from .Vehiculo import Vehiculo
+from typing import Optional
 
 # Define ObjectId as a valid type for Pydantic to handle
 class ObjectIdField(str):
@@ -17,15 +14,18 @@ class ObjectIdField(str):
             return str(v)
         return v
 
-class VehiculoPlusLocation(BaseModel):
+class Song(BaseModel):
     id: ObjectIdField = Field(..., alias="_id")
-    vehiculo: Vehiculo
-    latitud: float
-    longitud: float
-    timeStamp: datetime
-    timeStampServer: datetime
-    speed: float
-    batteryPercentage: Optional[float] = None  # Make this field optional
-    usuario: ObjectIdField
-    applicationVersion: Optional[str] = None  # Optional field
-    locationAccuracy: Optional[float] = None  # Optional field
+    name: Optional[str] = None
+    title: str
+    sub_title: Optional[str] = None
+    bitrate: int
+    commentaries: str
+    main_artist: str
+    collaborators: str
+    album_artist: str
+    album: str
+    year: str
+    track_number: str
+    genre: str
+    duration: int
