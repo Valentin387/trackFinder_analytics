@@ -55,8 +55,8 @@ def fetch_songs_from_db() -> List[Song]:
         print(f"Fetching songs from {collection_name} ...")
         collection = db[collection_name]
         results = collection.find()
+        print(f"--Songs retrieved: {len(results)}")
         song_data_list.extend(Song(**doc) for doc in results)
-    print(f"Total songs retrieved: {len(song_data_list)}")
     save_to_pickle(song_data_list, PICKLE_FILE)
     return song_data_list
 
