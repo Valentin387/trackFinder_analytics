@@ -1,5 +1,4 @@
 venv/
-locationAnalytics/
 local_exports/
 *.pyc
 __pycache__/
