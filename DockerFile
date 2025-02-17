@@ -1,0 +1,20 @@
+# Use the official Python image as the base
+FROM python:3.12.7
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the requirements file
+COPY requirements.txt .
+
+# Install the necessary packages
+RUN pip install -r requirements.txt
+
+# Copy the rest of your project files
+COPY . .
+
+# Expose the necessary port(s), e.g., for the application to run
+EXPOSE 5000
+
+# Command to start the application
+CMD ["python", "main.py"]
